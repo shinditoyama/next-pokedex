@@ -1,10 +1,9 @@
 import { GetServerSideProps } from "next";
-import Image from "next/image";
-import { gql } from "@apollo/client";
+import { SimpleGrid, Heading } from "@chakra-ui/react";
 import Layout from "../../components/Layout";
-import { IMAGE_URL } from "../../utils/constants";
-import { client } from "../../utils/graphql";
-import { GET_POKEMONS } from "../../utils/query";
+import PokemonInfo from "../../components/PokemonInfo";
+import { client } from "../../lib/apollo-client";
+import { GET_POKEMON } from "../../lib/queries/getPokemon";
 import { IPokemonDetail } from "../../types/Pokemon";
 
 interface Props {
@@ -13,34 +12,11 @@ interface Props {
 
 export default function Pokemon({ pokemon }: Props) {
   return (
-    <Layout title={`Pokémon | ${pokemon.name}`}>
-      <h2>
-        #{`00${pokemon.id}`.slice(-3)}. {pokemon.name.toUpperCase()}
-      </h2>
-      <Image
-        src={`${IMAGE_URL}${pokemon.id}.png`}
-        width="200%"
-        height="200%"
-        alt={pokemon.name}
-      />
-      <p>
-        <span>Weight:</span>
-        {pokemon.weight}
-      </p>
-      <p>
-        <span>Height:</span>
-        {pokemon.height}
-      </p>
-      <h2>Types</h2>
-      {pokemon.types?.map((type, index) => (
-        <p key={index}>{type.type.name}</p>
-      ))}
-      <h2>Status</h2>
-      {pokemon.stats?.map((stats, index) => (
-        <p key={index}>
-          {stats.stat.name}: {stats.base_stat}
-        </p>
-      ))}
+    <Layout title={pokemon.name}>
+      <Heading sx={{ textTransform: "capitalize" }}>{pokemon.name}</Heading>
+      <SimpleGrid columns={{ sm: 1, md: 3 }} spacing="10px">
+        <PokemonInfo pokemon={pokemon} />
+      </SimpleGrid>
     </Layout>
   );
 }
@@ -48,45 +24,43 @@ export default function Pokemon({ pokemon }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { name } = context.params;
   const { data } = await client.query({
-    query: gql`
-      ${GET_POKEMONS(name)}
-    `,
+    query: GET_POKEMON,
+    variables: { name },
   });
 
   return {
     props: {
-      pokemon: data.pokemon[0],
+      pokemon: data?.pokemon[0],
     },
   };
 };
 
 /* export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch(`${BASE_URL}pokemon?limit=${LIMIT}`);
-  const { results } = await response.json();
+  const { data } = await client.query({
+    query: GET_ALL_POKEMON,
+    variables: { limit: LIMIT },
+  });
 
-  const paths = results.map((pokemon: any) => ({
-    params: {
-      name: pokemon.name,
-    },
+  const paths = data?.pokemon.map((pokemon: any) => ({
+    params: { name: pokemon.name },
   }));
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
   const { name } = context.params;
   const { data } = await client.query({
-    query: gql`
-      ${GET_POKEMONS(name)}
-    `,
+    query: GET_POKEMON,
+    variables: { name },
   });
 
   return {
     props: {
-      pokemon: data.pokemon[0],
+      pokemon: data?.pokemon[0],
     },
   };
 }; */

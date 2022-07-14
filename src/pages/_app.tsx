@@ -3,7 +3,9 @@ import React from "react";
 import Head from "next/head";
 import { ChakraProvider, extendTheme, CSSReset } from "@chakra-ui/react";
 import { Global, css } from "@emotion/react";
+import { ApolloProvider } from "@apollo/client";
 import { RecoilRoot } from "recoil";
+import { client } from "../lib/apollo-client";
 import theme from "../styles/theme";
 
 const myTheme = extendTheme(theme);
@@ -36,13 +38,15 @@ const GlobalStyle = ({ children }: Props) => (
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <RecoilRoot>
-      <ChakraProvider theme={myTheme}>
-        <GlobalStyle>
-          <Component {...pageProps} />
-        </GlobalStyle>
-      </ChakraProvider>
-    </RecoilRoot>
+    <ApolloProvider client={client}>
+      <RecoilRoot>
+        <ChakraProvider theme={myTheme}>
+          <GlobalStyle>
+            <Component {...pageProps} />
+          </GlobalStyle>
+        </ChakraProvider>
+      </RecoilRoot>
+    </ApolloProvider>
   );
 }
 

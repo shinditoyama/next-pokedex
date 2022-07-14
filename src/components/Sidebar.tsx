@@ -1,8 +1,10 @@
 import React from "react";
 import {
   Box,
+  IconButton,
   CloseButton,
   Flex,
+  HStack,
   useColorModeValue,
   Drawer,
   DrawerContent,
@@ -11,21 +13,24 @@ import {
   BoxProps,
   FlexProps,
 } from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import NavItem from "./NavItem";
+import SearchName from "./SearchName";
+import SearchType from "./SearchType";
 
 interface LinkItemProps {
   id: number;
   name: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { id: 1, name: "Geração I" },
-  { id: 2, name: "Geração II" },
-  { id: 3, name: "Geração III" },
-  { id: 4, name: "Geração IV" },
-  { id: 5, name: "Geração V" },
-  { id: 6, name: "Geração VI" },
-  { id: 7, name: "Geração VII" },
-  { id: 8, name: "Geração VIII" },
+  { id: 1, name: "Generation I" },
+  { id: 2, name: "Generation II" },
+  { id: 3, name: "Generation III" },
+  { id: 4, name: "Generation IV" },
+  { id: 5, name: "Generation V" },
+  { id: 6, name: "Generation VI" },
+  { id: 7, name: "Generation VII" },
+  { id: 8, name: "Generation VIII" },
 ];
 
 export default function SidebarWithHeader({
@@ -35,7 +40,7 @@ export default function SidebarWithHeader({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box minH="100vh" bg={useColorModeValue("red.100", "gray.900")}>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
@@ -79,7 +84,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => (
   >
     <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
       <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-        Logo
+        Pokedex
       </Text>
       <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
     </Flex>
@@ -105,13 +110,18 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => (
     justifyContent={{ base: "space-between", md: "flex-end" }}
     {...rest}
   >
-    <Text
+    <IconButton
       display={{ base: "flex", md: "none" }}
-      fontSize="2xl"
-      fontFamily="monospace"
-      fontWeight="bold"
-    >
-      Logo
-    </Text>
+      onClick={onOpen}
+      variant="outline"
+      aria-label="open menu"
+      icon={<HamburgerIcon />}
+      bg="white"
+    />
+
+    <HStack spacing={{ base: "0", sm: "3", md: "6" }}>
+      <Text>Type:</Text> <SearchType />
+      <Text>Name:</Text> <SearchName />
+    </HStack>
   </Flex>
 );

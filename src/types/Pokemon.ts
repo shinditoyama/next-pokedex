@@ -1,15 +1,7 @@
 export interface IPokemons {
   id: number;
   name: string;
-  pokemon_color_id: number;
-}
-
-export interface IPokemonDetail {
-  id: number;
-  name: string;
-  height: number;
-  weight: number;
-  types?: [
+  types: [
     {
       type: {
         id: number;
@@ -17,7 +9,22 @@ export interface IPokemonDetail {
       };
     }
   ];
-  stats?: [
+}
+
+export interface IPokemonDetail {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  types: [
+    {
+      type: {
+        id: number;
+        name: string;
+      };
+    }
+  ];
+  stats: [
     {
       base_stat: number;
       stat: {
@@ -25,4 +32,19 @@ export interface IPokemonDetail {
       };
     }
   ];
+  pokemon_species: {
+    evolutionchain: {
+      pokemon: [
+        {
+          id: number;
+          name: string;
+        }
+      ];
+    };
+  };
+}
+
+export interface ITypes {
+  id: number;
+  name: string;
 }
