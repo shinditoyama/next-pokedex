@@ -1,6 +1,8 @@
 # Next Pokedex
 
-![screenshot](https://raw.githubusercontent.com/shinditoyama/next-todo/main/public/assets/pokedex.gif)
+![screenshot](https://raw.githubusercontent.com/shinditoyama/next-pokedex/main/public/assets/pokedex.gif)
+
+**live demo: [https://next-pokedex-three.vercel.app/](https://next-pokedex-three.vercel.app/)**
 
 ## Descrição
 
