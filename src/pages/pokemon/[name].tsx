@@ -1,4 +1,3 @@
-// import { queryClient } from "@/lib/query-client";
 import SEO from "@/components/SEO";
 import { useGetPokemonDetail } from "@/lib/useRequest";
 import { IMAGE_URL } from "@/utils/constants";
@@ -34,7 +33,7 @@ export default function Pokemon() {
         <Box>
           <Heading sx={{ textTransform: "capitalize" }}>{pokemon.name}</Heading>
           <SimpleGrid columns={{ sm: 1, md: 3 }} spacing="10px">
-            <Box p={4} borderWidth="1px" borderRadius="md" bg="tomato">
+            <Box p={4} borderWidth="1px" borderRadius="md">
               <Center>
                 <Image
                   src={`${IMAGE_URL}${

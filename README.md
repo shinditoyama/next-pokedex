@@ -2,17 +2,19 @@
 
 ![screenshot](https://raw.githubusercontent.com/shinditoyama/next-pokedex/main/public/assets/pokedex.gif)
 
-**live demo: [https://next-pokedex-three.vercel.app/](https://next-pokedex-three.vercel.app/)**
-
 ## Descrição
 
-Este é uma aplicação Pokedex construído utilizando o framework Next.js e GraphQL para pegar os dados do pokemos através do API Pokeapi.
+Este é uma aplicação Pokedex construído utilizando o Next.js e GraphQL para buscar os dados do pokemos através do API Pokeapi.
+
+Se você deseja experimentar o sistema, confira a demonstração anexado no link abaixo:
+
+**live demo: [https://next-pokedex-three.vercel.app/](https://next-pokedex-three.vercel.app/)**
 
 ## Features
 
-- [x] Explorar pokemons.
-- [x] Pesquise pokemons pelo nome, tipo e geração.
-- [x] O Pokedex contém lista de todos os pokemons até a 9ª geração.
+- [x] Explorar pokemons
+- [x] Pesquise pokemons pelo nome, tipo e geração
+- [x] A Pokedex contém lista de todos os pokemons até a 9ª geração
 
 ## Tecnologias
 
